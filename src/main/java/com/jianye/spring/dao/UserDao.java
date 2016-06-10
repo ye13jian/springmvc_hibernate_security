@@ -4,4 +4,6 @@ import com.jianye.spring.entity.AcctUser;
 
 public interface UserDao extends GernicDao<AcctUser, String> {
 
+	AcctUser findUserByNickname(String username);
+
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd"
+		default-lazy-init="true">
+	<!-- 配置说明 -->
+	<description>spring-security配置</description>
+	
+	<!-- 静态资源过滤 -->
+	<security:http pattern="/js/**" security="none"/>
+	<security:http pattern="/css/**" security="none"/>
+	<security:http pattern="/images/**" security="none"/>
+	
+	<security:http>  
+        <security:intercept-url pattern="/user/save*"  
+            access="ROLE_添加用户" requires-channel="any" />  
+        <security:intercept-url pattern="/user/delete*"  
+            access="ROLE_删除用户" requires-channel="any" />  
+        <security:intercept-url pattern="/user/user*"  
+            access="ROLE_浏览用户" requires-channel="any" />  
+        <security:intercept-url pattern="/user/update*"  
+            access="ROLE_修改用户" requires-channel="any" />  
+  
+        <security:session-management>  
+            <security:concurrency-control  
+                expired-url="/login/login.htmls?repeat=true" max-sessions="1"  
+                error-if-maximum-exceeded="true" />  
+        </security:session-management>  
+  
+        <security:form-login login-page="/login/login.htmls"  
+            authentication-failure-url="/login/login.htmls?error=true"  
+            default-target-url="/user/main.htmls" always-use-default-target='true'  
+            username-parameter="nickName" password-parameter="nickPassword" />  
+  
+        <security:logout invalidate-session="true"  
+            logout-success-url="/login/login.htmls?logout=true" />  
+  
+    </security:http>
+    
+    <!-- 认证配置 自定义认证实现UserDetailsService接口 -->  
+    <security:authentication-manager>  
+        <security:authentication-provider  
+            user-service-ref="userDetailsService">  
+            <!-- 配置密码加密方式 -->  
+            <security:password-encoder hash="md5" />  
+        </security:authentication-provider>  
+    </security:authentication-manager>  
+  
+    <bean id="userDetailsService" class="com.jianye.spring.service.impl.UserDetailsServiceImpl" />  
+    <!-- 配置了静态文件管理，session对话管理，登录管理，注销配置，权限配置，自定义数据表权限认证配置 -->
+</beans>

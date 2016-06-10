@@ -68,4 +68,9 @@ public class AcctAuthority implements java.io.Serializable {
 		this.acctRoles = acctRoles;
 	}
 
+	public String getPrefixedName() {
+		String prefixedName = "spring_mvc";
+		return null;
+	}
+
 }

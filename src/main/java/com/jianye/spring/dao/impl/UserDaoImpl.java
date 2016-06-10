@@ -62,4 +62,11 @@ public class UserDaoImpl implements UserDao {
 		this.getCurrentSession().flush();
 	}
 
+	@Override
+	public AcctUser findUserByNickname(String username) {
+		AcctUser acctUser = (AcctUser) this.getCurrentSession().createQuery(" from AcctUser where nickName = ?")
+				.setParameter(0, username).uniqueResult();
+		return acctUser;
+	}
+
 }

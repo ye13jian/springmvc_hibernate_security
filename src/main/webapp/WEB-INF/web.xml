@@ -6,12 +6,46 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>/WEB-INF/spring/root-context.xml,
+			classpath:spring/spring.xml,
+			classpath:spring/spring-hibernate.xml,
+			classpath:spring/spring-security.xml
+		</param-value>
 	</context-param>
+	
+	<!-- openSessionInView配置 作用是延迟session关闭到view层 -->  
+    <filter>  
+        <filter-name>openSessionInViewFilter</filter-name>  
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>  
+        <init-param>  
+            <param-name>singleSession</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+    </filter>
+    
+    <filter-mapping>
+    	<filter-name>openSessionInViewFilter</filter-name>
+    	<url-pattern>*.htmls</url-pattern>
+    </filter-mapping> 
+    
+    <!-- Spring Security Filter 最好配置在控制层 Filter的前面 -->
+    <filter>  
+        <filter-name>springSecurityFilterChain</filter-name>  
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>springSecurityFilterChain</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- session用户管理 -->
+	<listener>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
 	</listener>
 
 	<!-- Processes application requests -->

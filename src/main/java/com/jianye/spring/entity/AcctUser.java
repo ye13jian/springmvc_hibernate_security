@@ -24,6 +24,7 @@ public class AcctUser implements java.io.Serializable {
 
 	private String id;
 	private String nickName;
+	private String nickPassword;
 	private String telephone;
 	private Date registerTime;
 	private Set<AcctRole> acctRoles = new HashSet<AcctRole>(0);
@@ -61,6 +62,15 @@ public class AcctUser implements java.io.Serializable {
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	
+	@Column(name = "nick_password")
+	public String getNickPassword() {
+		return nickPassword;
+	}
+	
+	public void setNickPassword(String nickPassword) {
+		this.nickPassword = nickPassword;
 	}
 
 	@Column(name = "telephone")
