@@ -6,3 +6,6 @@ http://localhost:8080/spring/login/login.htmls
 
 ###### 首页访问
 http://localhost:8080/spring/user/main.htmls  
+
+###### github地址
+https://github.com/ye13jian/springmvc_hibernate_security.git 
