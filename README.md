@@ -9,3 +9,5 @@ http://localhost:8080/spring/user/main.htmls
 
 ###### github地址
 https://github.com/ye13jian/springmvc_hibernate_security.git 
+
+###### 校验代码
