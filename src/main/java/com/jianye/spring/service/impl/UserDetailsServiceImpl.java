@@ -9,13 +9,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.jianye.spring.dao.UserDao;
 import com.jianye.spring.entity.AcctAuthority;
 import com.jianye.spring.entity.AcctRole;
 import com.jianye.spring.entity.AcctUser;
-import com.jianye.spring.service.UserDetailsService;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
